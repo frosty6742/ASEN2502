@@ -66,7 +66,7 @@ addpath(genpath('Design Input Files'));
 addpath(genpath('Model Functions'));
 
 %% Import and Read Aircraft Design File
-Design_Input_Filename = "Design Input File_Tempest.xlsx";
+Design_Input_Filename = "Design Input File.xlsx";
 
 Design_Input = readtable(Design_Input_Filename,'Sheet','Main_Input','ReadRowNames',true); %Read in Aircraft Geometry File
 Count = height(Design_Input); %Number of different aircraft configurations in design input file
@@ -144,7 +144,7 @@ Plot_DragPolar_Data = 1; %Set to 0 to suppress plots for this function or 1 to o
 
 %% Integrated data plots / Design Trade Studies Plots (Figures 2000 - 2099)
 %Student Team Developed Plots for Trade Studies
-%
+% %
 
 
 %% Reset default color order

@@ -76,26 +76,32 @@ for j = 1:numFiles
     Data15(j,4) = mean(RawData15(:,1)); %Sets mean of temperature (atmosphere) as 4th column
     Data15(j,5) = mean(RawData15(:,3)); %Sets mean of calculaed density (atmosphere) as 5th column
     Data15(j,6) = mean(RawData15(:,5)); %Sets mean of test section dynamic pressure as 6th column
-    Data15(j,7) = ; %Calculates test section static pressure by calculating Po - q
+    Data15(j,7) = Data15(j,3)-Data15(j,6); %Calculates test section static pressure by calculating Po - q
     %Calculate airfoil port static pressures from measured differential
     %pressues (P_port - P_static_test) & sets columns 8 - 24 as airfoil static port pressure values (calculated) 
-    Data15(j,8) = ; %Airfoil scanivalve port 1
-    Data15(j,9) = ; %Airfoil scanivalve port 2
-    Data15(j,10) = ; %Airfoil scanivalve port 3
-    Data15(j,11) = ; %Airfoil scanivalve port 4
-    Data15(j,12) = ; %Airfoil scanivalve port 5
-    Data15(j,13) = ; %Airfoil scanivalve port 6
-    Data15(j,14) = ; %Airfoil scanivalve port 7
-    Data15(j,15) = ; %Airfoil scanivalve port 8
-    Data15(j,16) = ; %Airfoil scanivalve port 9
-    Data15(j,17) = ; %TE - Assume Airfoil trailing edge pressure = test section static pressure
-    Data15(j,18) = ; %Airfoil scanivalve port 10
-    Data15(j,19) = ; %Airfoil scanivalve port 11
-    Data15(j,20) = ; %Airfoil scanivalve port 12
-    Data15(j,21) = ; %Airfoil scanivalve port 13
-    Data15(j,22) = ; %Airfoil scanivalve port 14
-    Data15(j,23) = ; %Airfoil scanivalve port 15
-    Data15(j,24) = ; %Airfoil scanivalve port 16
+    % Data15(j,8) = ; %Airfoil scanivalve port 1
+    % Data15(j,9) = ; %Airfoil scanivalve port 2
+    % Data15(j,10) = ; %Airfoil scanivalve port 3
+    % Data15(j,11) = ; %Airfoil scanivalve port 4
+    % Data15(j,12) = ; %Airfoil scanivalve port 5
+    % Data15(j,13) = ; %Airfoil scanivalve port 6
+    % Data15(j,14) = ; %Airfoil scanivalve port 7
+    % Data15(j,15) = ; %Airfoil scanivalve port 8
+    % Data15(j,16) = ; %Airfoil scanivalve port 9
+    for k = 8:16 % Do each port in a for loop instead of line by line
+        Data15(j,k) = mean(RawData15(:,k+7))-Data15(j,7);
+    end
+    Data15(j,17) = Data15(j,7); %TE - Assume Airfoil trailing edge pressure = test section static pressure
+    % Data15(j,18) = ; %Airfoil scanivalve port 10
+    % Data15(j,19) = ; %Airfoil scanivalve port 11
+    % Data15(j,20) = ; %Airfoil scanivalve port 12
+    % Data15(j,21) = ; %Airfoil scanivalve port 13
+    % Data15(j,22) = ; %Airfoil scanivalve port 14
+    % Data15(j,23) = ; %Airfoil scanivalve port 15
+    % Data15(j,24) = ; %Airfoil scanivalve port 16
+    for k = 18:24 % Same as above
+        Data15(j,k) = mean(RawData(:,k+6))-Data15(j,7);
+    end
     Data15(j,25) = Data15(j,8); %Repeats port 1 (leading edge)
 
 end
